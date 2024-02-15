@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: darkgrey;
+    text-align:center;
+}
+
+#gameBoard
+{
+    border-style:solid;
+}
+
+#score{
+    display:flex;
+    justify-content: center;
+    margin-top:10px;
+    column-gap: 100px;
+    font-size:large;
+}
+
+h2{
+    margin-top:30px;
+    margin-bottom: 20px;
+}
