@@ -1,7 +1,7 @@
 const gameBoard = document.getElementById('gameBoard');
 const context = gameBoard.getContext('2d');
 const scoreElement = document.getElementById('scoreValue');
-
+const highScore = document.getElementById('highScore');
 
 let gameFacts = document.getElementById('showFact'); // API CALL FOR THE GAMING TRIVIA QUESTIONS STARTS HERE
 let ansBox = document.getElementById('ansBox');
@@ -21,7 +21,7 @@ fetch('https://opentdb.com/api.php?amount=50&category=15&difficulty=medium&type=
     console.log(error.message)
 })      //ENDS HERE
 
-// LOGIC FOR THE GAME STARTS HERE
+// LOGIC OF THE GAME STARTS HERE
 const WIDTH = gameBoard.width;
 const HEIGHT = gameBoard.height;
 
@@ -32,14 +32,20 @@ let foodY;
 let X_Direction = 25;
 let Y_Direction = 0;
 let score = 0;
+let highestScore = 0;
 let speed = 400;
 let active = true;
 let started = false;
 
+scoreElement.textContent = score; // TO DISPLAY THE CURRENT SCORE
+highScore.textContent = localStorage.getItem("highScore"); // TO DISPLAY THE HIGHEST SCORE
+
+
 let snake = [
     {x:foodPos,y:0},
     {x:0,y:0}
-]
+]  // SNAKE'S BODY
+
 
 window.addEventListener('keydown',keyBinding)
 startGame();
@@ -55,22 +61,22 @@ function startGame(){
 function clearBoard()
 {
     context.fillStyle = 'gray';
-    //(x,y,width,height)
+                    //(x,y,width,height)
     context.fillRect(0,0,WIDTH,HEIGHT);
 }
 
-function createFood(){
+function createFood(){  // FUNCTION TO CREATE THE FOOD POS
     foodX = (Math.floor(Math.random()*WIDTH/foodPos)*foodPos);
     foodY = (Math.floor(Math.random()*HEIGHT/foodPos)*foodPos);
 }
 
-function displayFood()
+function displayFood() // FUNCTION TO DISPLAY THE FOOD
 {
     context.fillStyle = 'white';
     context.fillRect(foodX,foodY,foodPos,foodPos);
 }
 
-function drawSnake()
+function drawSnake()  // FUNCTION TO DISPLAY THE SNAKE
 {
     context.fillStyle = 'lightgreen';
     context.strokeStyle = 'black';
@@ -80,13 +86,19 @@ function drawSnake()
     })
 }
 
-function moveSnake()
+function moveSnake()  // MOVEMENT OF THE SNAKE
 {
     const head = {x:snake[0].x + X_Direction, y:snake[0].y + Y_Direction}
     snake.unshift(head);
     if(snake[0].x == foodX && snake[0].y == foodY)
     {
         score += 1;
+        if(score>localStorage.getItem("highScore"))
+        {
+            highestScore = score;
+            localStorage.setItem("highScore",highestScore);
+            highScore.textContent = localStorage.getItem("highScore");
+        }
         if(score%15==0)
         {
             speed -= 20;
@@ -97,6 +109,7 @@ function moveSnake()
     else
         snake.pop();
 }
+
 
 function nextFrame()
 {
@@ -121,7 +134,7 @@ function nextFrame()
     }
 }
 
-function keyBinding(event)
+function keyBinding(event)  // ADDING KEYBINDINGS
 {
     if(!started){
         started = true;
@@ -156,7 +169,7 @@ function keyBinding(event)
     }
 }
 
-function checkGameOver()
+function checkGameOver()  //FUNCTION TO CHECK WHETHER THE GAME IS OVER
 {
     switch(true){
         case(snake[0].x<0):
@@ -174,7 +187,7 @@ function checkGameOver()
     }
 }
 
-function description(){
+function description(){   // TO DISPLAY THE RULES OF THE GAME
 context.font = "bold 20px serif";
 context.fillStyle = "lightgreen";
 context.textAlign = "start";
@@ -184,5 +197,6 @@ context.fillText("If you did, the Game will End",180,300);
 context.fillText("The speed of the snake will increase for every '15' Points",60,350);
 context.fillText("You score will be calculated",190,400);
 }
+
 
 //ENDS HERE
