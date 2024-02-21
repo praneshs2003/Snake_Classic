@@ -2,6 +2,26 @@ const gameBoard = document.getElementById('gameBoard');
 const context = gameBoard.getContext('2d');
 const scoreElement = document.getElementById('scoreValue');
 
+
+let gameFacts = document.getElementById('showFact'); // API CALL FOR THE GAMING TRIVIA QUESTIONS STARTS HERE
+let ansBox = document.getElementById('ansBox');
+
+fetch('https://opentdb.com/api.php?amount=50&category=15&difficulty=medium&type=multiple')
+.then((res)=>res.json())
+.then((facts)=>{
+    let buttonClick = document.getElementById('answerButton');
+    const ques = Math.floor(Math.random()*facts.results.length);
+    let para = document.createElement('p');
+    gameFacts.innerHTML = facts.results[ques].question;
+    buttonClick.addEventListener('click',()=>{
+        ansBox.innerHTML = "Answer:  "+ '    '+ facts.results[ques].correct_answer;
+    })
+})
+.catch((error)=>{console.log(error)
+    console.log(error.message)
+})      //ENDS HERE
+
+// LOGIC FOR THE GAME STARTS HERE
 const WIDTH = gameBoard.width;
 const HEIGHT = gameBoard.height;
 
@@ -30,8 +50,6 @@ function startGame(){
     context.fillRect(0,0,WIDTH,HEIGHT);
     createFood();
     description();
-    // displayFood();
-    // drawSnake();
 }
 
 function clearBoard()
@@ -166,3 +184,5 @@ context.fillText("If you did, the Game will End",180,300);
 context.fillText("The speed of the snake will increase for every '15' Points",60,350);
 context.fillText("You score will be calculated",190,400);
 }
+
+//ENDS HERE

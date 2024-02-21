@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game_style.css">
+    <link rel="icon" type="image/x-icon" href="/Snake_Classic/snakeLogo.png">
     <title>Snake Classic</title>
 </head>
 <body>
     <h2>Snake - Classic</h2>
-    <div id="container">
 
-        <canvas id="gameBoard" width="600" height="550"></canvas>
-        
-        <div id="score">
-            Score: <span id="scoreValue"></span>
+    <div class ="container">
+        <div>
+            <canvas id="gameBoard" width="600" height="550"></canvas>
         </div>
-    
+        <div id="gamingFacts">
+            <h1>Random Game Questions</h1>
+            <p id="showFact"></p>
+            <div id="options">
+
+            </div>
+            <p id="ansBox"></p>
+            <button id="answerButton">Show Answer</button>
+        </div>
+    </div>
+
+    <div id="score">
+        Score: <span id="scoreValue"></span>
     </div>
     <script src="game_logic.js"></script>
 </body>

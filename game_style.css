@@ -1,9 +1,22 @@
 *{
-    margin: 0;
-    padding: 0;
     font-family: sans-serif;
-    background-color: darkgrey;
     text-align:center;
+}
+
+h2{
+    background-color: lightgreen;
+}
+
+body{
+    background-color: darkgrey;
+    margin:0;
+}
+
+.container{
+    display:flex;
+    flex-direction: row;
+    padding-left: 25%;
+    gap:1%;
 }
 
 #gameBoard
@@ -11,15 +24,43 @@
     border-style:solid;
 }
 
+#gamingFacts{
+    padding-top: 10%;
+    margin-left:10%;
+    margin-right:1%;
+    width:40%;
+    background-color: lightskyblue;
+}
+
+#showFact{
+    font-size: large;
+}
+
+#ansBox{
+    background-color: lightgreen;
+}
+
+#answerButton{
+    padding: 10px 5px 10px 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#answerButton:hover{
+    color:white;
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
 #score{
-    display:flex;
-    justify-content: center;
-    margin-top:10px;
-    column-gap: 100px;
+    background-color: lightgreen;
+    margin-top:20px;
     font-size:large;
+    border: 2px solid black;
 }
 
 h2{
-    margin-top:30px;
+    border:solid 2px black;
+    margin-top:10px;
     margin-bottom: 20px;
 }
