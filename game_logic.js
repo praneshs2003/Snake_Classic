@@ -5,21 +5,21 @@ const highScore = document.getElementById('highScore');
 
 let gameFacts = document.getElementById('showFact'); // API CALL FOR THE GAMING TRIVIA QUESTIONS STARTS HERE
 let ansBox = document.getElementById('ansBox');
+let buttonClick = document.getElementById('answerButton');
 
+buttonClick.addEventListener('click',()=>{
 fetch('https://opentdb.com/api.php?amount=50&category=15&difficulty=medium&type=multiple')
 .then((res)=>res.json())
 .then((facts)=>{
-    let buttonClick = document.getElementById('answerButton');
     const ques = Math.floor(Math.random()*facts.results.length);
-    let para = document.createElement('p');
     gameFacts.innerHTML = facts.results[ques].question;
-    buttonClick.addEventListener('click',()=>{
-        ansBox.innerHTML = "Answer:  "+ '    '+ facts.results[ques].correct_answer;
-    })
+    ansBox.innerHTML = "Answer:  "+ '    '+ facts.results[ques].correct_answer;
 })
 .catch((error)=>{console.log(error)
+    gameFacts.innerHTML = "something went wrong. please try again";
+    ansBox.innerHTML = " ";
     console.log(error.message)
-})      //ENDS HERE
+})    })   //ENDS HERE
 
 // LOGIC OF THE GAME STARTS HERE
 const WIDTH = gameBoard.width;
