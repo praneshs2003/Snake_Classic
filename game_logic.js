@@ -38,6 +38,7 @@ let active = true;
 let started = false;
 
 scoreElement.textContent = score; // TO DISPLAY THE CURRENT SCORE
+localStorage.getItem("highScore",highestScore);
 highScore.textContent = localStorage.getItem("highScore"); // TO DISPLAY THE HIGHEST SCORE
 
 
