@@ -54,7 +54,6 @@ function startGame(){
     context.fillStyle = 'gray';
                   //(x,y,width,height)
     context.fillRect(0,0,WIDTH,HEIGHT);
-    createFood();
     description();
 }
 
@@ -138,6 +137,7 @@ function keyBinding(event)  // ADDING KEYBINDINGS
 {
     if(!started){
         started = true;
+        createFood();
         nextFrame();
     }
 
